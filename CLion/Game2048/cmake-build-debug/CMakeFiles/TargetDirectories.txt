@@ -1,0 +1,3 @@
+C:/Users/11017/OneDrive/Codes/Game-2048/CLion/Game2048/cmake-build-debug/CMakeFiles/Game2048.dir
+C:/Users/11017/OneDrive/Codes/Game-2048/CLion/Game2048/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/11017/OneDrive/Codes/Game-2048/CLion/Game2048/cmake-build-debug/CMakeFiles/rebuild_cache.dir

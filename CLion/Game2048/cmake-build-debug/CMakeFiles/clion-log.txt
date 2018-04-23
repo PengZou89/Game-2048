@@ -1,0 +1,11 @@
+"C:\Program Files\JetBrains\CLion 2018.1.1\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\11017\OneDrive\Codes\Game-2048\CLion\Game2048
+-- The C compiler identification is GNU 7.3.0
+-- Check for working C compiler: C:/mingw64/bin/gcc.exe
+-- Check for working C compiler: C:/mingw64/bin/gcc.exe -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/11017/OneDrive/Codes/Game-2048/CLion/Game2048/cmake-build-debug

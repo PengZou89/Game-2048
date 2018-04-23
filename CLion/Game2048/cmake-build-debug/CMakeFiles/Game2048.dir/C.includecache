@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/11017/OneDrive/Codes/Game-2048/CLion/Game2048/main.c
+stdio.h
+-
+stdlib.h
+-
+time.h
+-
+conio.h
+-
+stdbool.h
+-
+
