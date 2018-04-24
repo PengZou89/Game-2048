@@ -136,6 +136,9 @@ void gridInit() {
 
 int inputHandle(char c) {
     if (gameOverFlg == false) {
+        // 1. 有空格点，进行了移位
+        // 2. 有相等格点，进行了相加
+        bool gridNeedInitFlg = false;
         switch (c) {
             case 'h':
                 for (int i = 0; i < N; i++) {
@@ -143,7 +146,14 @@ int inputHandle(char c) {
                     int k = 0;
                     for (int j = 0; j < N; j++) {
                         if (map[i][j] == 0) continue;
-                        map[i][k++] = map[i][j];
+                        // 分情况讨论:
+                        // 1. 如果前面没0，如[2 4 8 0]，则不进行前移操作，也就不能init a grid
+                        // 2. 如果前面或中间有0，如[0 2 0 4]，则需要init a grid
+                        if (map[i][k] != map[i][j]) {
+                            map[i][k] = map[i][j];
+                            gridNeedInitFlg = true;
+                        }
+                        k++;
                     }
                     //add the back num to the front one if they are equal
                     for (int j = 0; j < k - 1; j++) {
@@ -151,6 +161,7 @@ int inputHandle(char c) {
                             map[i][j] += map[i][j + 1];
                             score += map[i][j];
                             map[i][j + 1] = 0;
+                            gridNeedInitFlg = true;
                             break;
                         }
                     }
@@ -166,20 +177,28 @@ int inputHandle(char c) {
                 }
                 //每个case都重复了以下两句，用来防止错误按键更改map及blankGrids状态
                 blankGridsHandle();
-                gridInit();
+                if (gridNeedInitFlg) {
+                    gridNeedInitFlg = false;
+                    gridInit();
+                }
                 break;
             case 'j':
                 for (int j = 0; j < N; j++) {
                     int k = N - 1;
                     for (int i = N - 1; i >= 0; i--) {
                         if (map[i][j] == 0) continue;
-                        map[k--][j] = map[i][j];
+                        if (map[k][j] != map[i][j]) {
+                            map[k][j] = map[i][j];
+                            gridNeedInitFlg = true;
+                        }
+                        k--;
                     }
                     for (int i = N - 1; i > k + 1; i--) {
                         if (map[i][j] == map[i - 1][j]) {
                             map[i][j] += map[i - 1][j];
                             score += map[i][j];
                             map[i - 1][j] = 0;
+                            gridNeedInitFlg = true;
                             break;
                         }
                     }
@@ -193,20 +212,28 @@ int inputHandle(char c) {
                     }
                 }
                 blankGridsHandle();
-                gridInit();
+                if (gridNeedInitFlg) {
+                    gridNeedInitFlg = false;
+                    gridInit();
+                }
                 break;
             case 'k':
                 for (int j = 0; j < N; j++) {
                     int k = 0;
                     for (int i = 0; i < N; i++) {
                         if (map[i][j] == 0) continue;
-                        map[k++][j] = map[i][j];
+                        if (map[k][j] != map[i][j]) {
+                            map[k][j] = map[i][j];
+                            gridNeedInitFlg = true;
+                        }
+                        k++;
                     }
                     for (int i = 0; i < k - 1; i++) {
                         if (map[i][j] == map[i + 1][j]) {
                             map[i][j] += map[i + 1][j];
                             score += map[i][j];
                             map[i + 1][j] = 0;
+                            gridNeedInitFlg = true;
                             break;
                         }
                     }
@@ -220,20 +247,28 @@ int inputHandle(char c) {
                     }
                 }
                 blankGridsHandle();
-                gridInit();
+                if (gridNeedInitFlg) {
+                    gridNeedInitFlg = false;
+                    gridInit();
+                }
                 break;
             case 'l':
                 for (int i = 0; i < N; i++) {
                     int k = N - 1;
                     for (int j = N - 1; j >= 0; j--) {
                         if (map[i][j] == 0) continue;
-                        map[i][k--] = map[i][j];
+                        if (map[i][k] != map[i][j]) {
+                            map[i][k] = map[i][j];
+                            gridNeedInitFlg = true;
+                        }
+                        k--;
                     }
                     for (int j = N - 1; j > k + 1; j--) {
                         if (map[i][j] == map[i][j - 1]) {
                             map[i][j] += map[i][j - 1];
                             score += map[i][j];
                             map[i][j - 1] = 0;
+                            gridNeedInitFlg = true;
                             break;
                         }
                     }
@@ -247,7 +282,10 @@ int inputHandle(char c) {
                     }
                 }
                 blankGridsHandle();
-                gridInit();
+                if (gridNeedInitFlg) {
+                    gridNeedInitFlg = false;
+                    gridInit();
+                }
                 break;
             default:
                 break;
